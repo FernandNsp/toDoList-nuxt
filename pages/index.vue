@@ -2,7 +2,7 @@
 	<v-container
 		class="mx-12"
 	>
-		<h1 class="blue darken-2 text-center mb-4">ToDo List {{ newTask }}</h1>
+		<h1 class="blue darken-2 text-center mb-4">ToDo List - {{ tasks }}</h1>
 		<v-row>
 			<v-col cols="12">
 				<v-input>
@@ -10,13 +10,13 @@
 						type="text"
 						label="Nova tarefa"
 						v-model="novaTask"
-						@keypress.enter="setTask"
+						@keypress.enter="enviarTask(novaTask)"
 					></v-text-field>
 				</v-input>
 				<v-btn
 					light
 					color="primary"
-					@click="setTask"
+					@click="enviarTask(novaTask)"
 				>
 					Adicionar
 				</v-btn>
@@ -25,7 +25,7 @@
 		<v-row>
 			<v-col>
 				<Task
-					v-for="(task, index) in $store.state.tasks"
+					v-for="(task, index) in tasks"
 					:key="index"
 					:task="task"
 				/>
@@ -35,29 +35,24 @@
 </template>
 
 <script>
+	import { mapState } from "vuex"
+
 	export default {
 		name: 'IndexPage',
-		setup(){
-			const novaTask = ''
-			return {
-				novaTask
-			}
-		},
 		computed: {
-			newTask(){
-				return this.$store.state.newTask
+			...mapState(["tasks"]),
+			novaTask: {
+				get(){
+					return this.$store.state.newTask
+				},
+				set(value){
+					this.$store.commit('READ_TASK', value)
+				}
 			}
 		},
 		methods: {
-			setTask(){
-				if(this.novaTask){
-					this.$store.commit('SET_TASK', this.novaTask);
-					this.novaTask = '';
-				}
-			},
-			handleClick(){
-				this.$store.commit("VIEW_TASK", this.novaTask)
-				this.novaTask = '';
+			enviarTask(value){
+				this.$store.dispatch('setTask', value)
 			}
 		}
 	}
