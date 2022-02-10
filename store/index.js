@@ -1,6 +1,6 @@
 export const state = () => ({
 	tasks: [],
-	newTask: "",
+	newTask: '',
 })
 
 export const mutations = {
@@ -12,21 +12,23 @@ export const mutations = {
 		// state.tasks.push(payload)
 	},
 	REMOVE_TASK(state, payload){
-		state.tasks.splice(state.tasks.indexOf(payload), 1)
+		const indexTask = state.tasks.findIndex((task) => task.content === payload.content)
+		state.tasks.splice(indexTask, 1)
 	},
 	HAS_COMPLETED(state, payload){
 		payload.completed = !payload.completed
-	}
+	},
 }
 
 export const actions = {
 	setTask(context, payload){
 		context.commit('SET_TASK', payload)
-	}
+	},
+	removeTask(context, payload){
+		context.commit('REMOVE_TASK', payload)
+	},
 }
 
-// export const getters = {
-// 	livrosLidos(state){
-// 		return state.livros.filter((livro) => livro.lido)
-// 	},
-// }
+export const getters = {
+	taskList: (state) => state.tasks
+}

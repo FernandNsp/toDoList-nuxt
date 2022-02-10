@@ -6,7 +6,7 @@ export default {
 		titleTemplate: '%s - todo-vuex',
 		title: 'todo-vuex',
 		htmlAttrs: {
-			lang: 'pt-BR'
+			lang: 'pt-br'
 		},
 		meta: [
 			{ charset: 'utf-8' },
@@ -25,6 +25,7 @@ export default {
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
+		{ src: '~/plugins/vuex-persist.js', mode: 'client' }
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
