@@ -9,7 +9,6 @@ export const mutations = {
 	},
 	SET_TASK(state, payload){
 		state.tasks = [{ content: payload, completed: false }, ...state.tasks]
-		// state.tasks.push(payload)
 	},
 	REMOVE_TASK(state, payload){
 		const indexTask = state.tasks.findIndex((task) => task.content === payload.content)
