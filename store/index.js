@@ -17,6 +17,9 @@ export const mutations = {
 	HAS_COMPLETED(state, payload){
 		payload.completed = !payload.completed
 	},
+	HAS_MODAL(state, payload){
+		state.dialog = payload
+	},
 }
 
 export const actions = {

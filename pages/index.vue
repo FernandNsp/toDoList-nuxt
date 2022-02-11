@@ -1,29 +1,26 @@
 <template>
 	<div>
-		<v-container
-			style="max-width: 760px; min-width: 320px"
-		>
+		<v-container style="max-width: 760px; min-width: 320px">
 			<h1 class="mt-8 mb-4">ToDo List</h1>
 			<v-row>
 				<v-col cols="12" class="pb-0 d-flex">
-					<v-textarea
+					<v-text-field
 						v-model.trim="novaTask"
-						rows="1"
-						auto-grow
-						filled
+						type="text"
 						background-color="white"
+						filled
+						@keyup.enter.prevent="enviarTask"
 						label="Insira aqui a tarefa"
 						class="d-flex"
-					>
-						<v-text-field
-							type="text"
-						></v-text-field>
-					</v-textarea>
+						elevation="2"
+					></v-text-field>
+
 					<v-btn
 						small
-						height="56px"
+						height="57px"
 						class="rounded-l-0"
 						light
+						elevation="0"
 						color="primary"
 						@click="enviarTask"
 					>
